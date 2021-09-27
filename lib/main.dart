@@ -4,6 +4,8 @@
 
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:random_color/random_color.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -31,6 +33,8 @@ class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final _saved = <WordPair>{};
   final _biggerFont = const TextStyle(fontSize: 18.0);
+  final _randomColor = RandomColor();
+  Color previousColor = Color(0);
 
   void _pushSaved() {
     Navigator.of(context).push(
@@ -67,7 +71,8 @@ class _RandomWordsState extends State<RandomWords> {
       appBar: AppBar(
         title: const Text('Startup Name Generator'),
         actions: [
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
+          IconButton(icon: Icon(Icons.list),
+              onPressed: _pushSaved),
         ],
       ),
 
@@ -90,6 +95,11 @@ class _RandomWordsState extends State<RandomWords> {
 
   Widget _buildRow(WordPair pair) {
     final alreadySaved = _saved.contains(pair);
+    Color tileColor = _randomColor.randomColor(colorBrightness: ColorBrightness.light);
+    while (tileColor == previousColor){
+      tileColor = _randomColor.randomColor(colorBrightness: ColorBrightness.light);
+    }
+    previousColor = tileColor;
     return ListTile(
       title: Text(
         pair.asPascalCase,
@@ -108,6 +118,7 @@ class _RandomWordsState extends State<RandomWords> {
           }
         });
       },
+      tileColor: tileColor,
     );
   }
 }
