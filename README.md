@@ -9,7 +9,7 @@ every time the list tile is added or re-rendered it changes its colour to a rand
 Therefore I imported a new library random_colors
 
 ## Setup
-#### First run ```flutter pub get``` for running the app
+#### First run ```flutter pub get``` for downloading the libs
 
 ## Start
 #### Run command is ```flutter run```
